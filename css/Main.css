@@ -38,6 +38,7 @@ div.ParamsEditView > div{
 
 }
 .ParamsEditView input{
+	position: relative;
 	margin: 10px;
 	background-color: rgba(240, 255, 255, 0.7)  !important;
 	padding: 8px;
@@ -45,6 +46,9 @@ div.ParamsEditView > div{
 	border-radius: 10px;
 	color: black;
 	width: 200px;
+	font-family: Consolas, 'Courier New', Courier, Monaco, monospace;
+	font-size: 16px;
+	font-weight: bold;
 
 }
 
@@ -53,8 +57,6 @@ div.ParamsEditView > div{
 	margin: 10px;
 	padding: 8px;
 	white-space: nowrap;
-	z-index: -1;
-
 }
 
 button.blueButton{
