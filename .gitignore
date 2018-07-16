@@ -1,0 +1,4 @@
+/vendor
+.vscode
+save/.local.db
+.key.json
