@@ -1200,6 +1200,7 @@
 		var mRedrawing = false;
 		var mRedraw = false;
 		var mWidths = [];
+		var mColumnType = [];
 
 		var view = GUI.createScrollView();
 		view.className = view.className+" GUIListView";
@@ -1219,11 +1220,6 @@
 
 		var mItemNode = document.createElement("div");
 		mHView.appendChild(mItemNode);
-
-
-		var mDownFlag = false;
-		var mDownX = 0;
-		var mDownY = 0;
 		view.addEventListener("mouseleave",function (e) {
 			mDownFlag = false;
 		});
@@ -1274,7 +1270,9 @@
 		view.getHoverIndex = function () {
 			return mOverItemIndex;
 		}
-
+		view.setColumnType = function(index,type){
+			mColumnType[index] = type;
+		}
 		var mSelectIndex = [];
 		var mLastIndex = 0;
 		var mSortFlag = [];
@@ -1566,6 +1564,8 @@
 						continue;
 					var node = createSel(nodeIndex++);
 					node.itemIndex = index;
+					if (mColumnType[i] === 1)
+						node.style.textAlign = 'right';
 
 					var className = "Item Item"+(index % 2);
 					if (item){
@@ -1690,6 +1690,14 @@
 			function sort(a, b) {
 				var valueA = view.getItemText(a, index);
 				var valueB = view.getItemText(b, index);
+				if(mColumnType[index] === 1){
+					if (valueA == '')
+						return 1;
+					if (valueB == '')
+						return -1;
+					valueA = parseFloat(valueA);
+					valueB = parseFloat(valueB);
+				}
 				if (valueA < valueB)
 					return -1 * sortFlag;
 				if (valueA == valueB)
@@ -1724,14 +1732,11 @@
 			this.redraw();
 		}
 
-		function createNode(value) {
+		function createNode(value,type) {
 			if (value != null && typeof (value) == "object")
 				return value;
 			var node = document.createElement("div");
-			if (node.textContent)
-				node.textContent = value;
-			else
-				node.textContent = value;
+			node.textContent = value;
 			return node;
 		}
 		//---------------------------------------
@@ -1743,12 +1748,12 @@
 			item.value = -1;
 			item.style.top = "0px";
 			item.style.left = "0px";
-			item.appendChild(createNode(value));
+			item.appendChild(createNode(value), mColumnType[0]);
 
 			//空データの追加
 			var count = this.getHeaderCount();
 			while (item.childNodes.length <= count)
-				item.appendChild(createNode(""));
+				item.appendChild(createNode("", mColumnType[item.childNodes.length]));
 
 			mItemNode.appendChild(item);
 

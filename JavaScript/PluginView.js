@@ -4,7 +4,7 @@ function createPluginView(){
 		if (values === null)
 			return;
 		var client = win.getClient();
-		client.classList.add("Plugins");
+		client.classList.add("BoxView");
 
 		for(var i=0;i<values.length;i++){
 			var value = values[i];

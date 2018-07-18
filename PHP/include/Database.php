@@ -166,8 +166,9 @@ class Database{
 				return $this->mDB->exec($sql);
 
 		}catch(PDOException $exception){
-			if($this->mErrorProc !== null)
-				call_user_func($this->mErrorProc,  $exception->getMessage(),$sql);
+			if($this->mErrorProc !== null){
+				//call_user_func($this->mErrorProc,  $exception->getMessage(),$sql);
+			}
 		}
 		return null;
 	}

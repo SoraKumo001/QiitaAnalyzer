@@ -65,8 +65,8 @@ function onStart(r){
 	item.addItem("データ確認").setItemValue(createQiitaTitleView);
 
 	item = rootItem.addItem("Google CNL");
-	item.addItem("構文分析");
-	item.addItem("感情分析");
+	item.addItem("設定").setItemValue(createGcnlView);
+
 
 	System.login.textContent = r.user.name;
 

@@ -59,7 +59,13 @@ class QiitaData{
 
 	}
 	public static function JS_getQiitaTitles(){
-		return MG::DB()->queryData("select qiita_item_id as id,title,create_at,likes,comments from qiita_item order by create_at desc");
+		return MG::DB()->queryData(
+			"select qiita_item_id as id,title,create_at,likes ,comments,not value isnull as analyze,score_abs,score_plus,score_minus from qiita_item
+				natural left join gcnl_sentiment
+				natural left join (select qiita_item_id,score as score_abs from gcnl_analyzed where analyz_type='ABS') a
+				natural left join (select qiita_item_id,score as score_plus from gcnl_analyzed where analyz_type='PLUS') b
+				natural left join (select qiita_item_id,score as score_minus from gcnl_analyzed where analyz_type='MINUS') c
+				order by create_at desc	");
 	}
 	public static function JS_getQiitaItem($id){
 		return MG::DB()->gets("select * from qiita_item where qiita_item_id=?",$id);
@@ -148,5 +154,8 @@ class QiitaData{
 			$user['followees_count'],
 			$user['followers_count']);
 		return $user['permanent_id'];
+	}
+	public static function getItem($id){
+		return MG::DB()->gets("select * from qiita_item where qiita_item_id=?",$id);
 	}
 }

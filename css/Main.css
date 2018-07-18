@@ -85,10 +85,10 @@ div.InputArea{
 	min-width: 300px;
 }
 
-div.Plugins{
+div.BoxView{
 	overflow: auto !important;
 }
-div.Plugins > div{
+div.BoxView > div{
 	display: inline-flex;
 	flex-direction : row;
 	margin: 1em;
@@ -98,19 +98,26 @@ div.Plugins > div{
 	min-width: 300px;
 }
 
-div.Plugins > div > div:first-child > div{
+div.BoxView > div > div:first-child > div{
 	background-color: rgba(17, 87, 134, 0.7);
 }
-div.Plugins > div > div:nth-child(2){
+div.BoxView > div > div:nth-child(2){
 	flex: 1;
 }
-div.Plugins > div > div:nth-child(2) > div{
+div.BoxView > div > div:nth-child(2) > div{
 	background-color: rgba(17, 87, 134, 0.4);
 }
-div.Plugins > div > div > div{
+div.BoxView > div > div > div{
 	color: white;
 	padding: 0.3em;
 	margin: 0.2em;
+}
+
+div.GroupView{
+	display: inline-flex;
+	align-items: center;
+	flex-direction : column;
+	margin: 1em;
 }
 
 div.QiitaInfoView{

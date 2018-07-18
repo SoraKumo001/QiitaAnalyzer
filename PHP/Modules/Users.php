@@ -1,5 +1,4 @@
 <?php
-//MG::addModule(new UserData);
 class Users{
 	static $JS_ENABLE;
 	const INFO = [
